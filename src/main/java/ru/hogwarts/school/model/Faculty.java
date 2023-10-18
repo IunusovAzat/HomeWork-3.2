@@ -4,7 +4,8 @@ import java.util.Objects;
 
 public class Faculty {
     private Long id;
-    private String name, color;
+    private String name;
+    private String color;
 
     public Faculty() {
     }
