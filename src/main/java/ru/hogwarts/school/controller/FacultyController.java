@@ -7,6 +7,7 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 
 import java.util.Collection;
+import java.util.List;
 
 
 @RestController
@@ -51,5 +52,16 @@ public class FacultyController {
     @GetMapping("/find")
     public Collection<Faculty> getAllByColor(@RequestParam String color) {
         return facultyService.getAllByColor(color);
+    }
+
+    @GetMapping("/sort")
+    public List<Faculty> getFacultySortedList(@RequestParam(value = "color") String color) {
+        return facultyService.sortFacultyByColor(color);
+    }
+
+    @GetMapping("/sortBy")
+    public List<Faculty> getFacultySortedByNameAndColorList(@RequestParam(value = "name") String name,
+                                                            @RequestParam(value = "color") String color) {
+        return facultyService.findByNameIgnoreCaseAndColorIgnoreCase(name, color);
     }
 }

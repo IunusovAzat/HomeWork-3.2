@@ -8,6 +8,7 @@ import ru.hogwarts.school.repository.StudentRepository;
 
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,6 +49,14 @@ public class StudentServiceImp implements StudentService {
                 stream().
                 filter(it->it.getAge()==age).
                 collect(Collectors.toList());
+    }
+    @Override
+    public List<Student> sortStudentByAge(int age) {
+        return studentRepository.findByAge(age);
+    }
+    @Override
+    public List<Student> findByAgeBetween(int ageMin, int ageMax) {
+        return studentRepository.findByAgeBetween(ageMin, ageMax);
     }
 
 }
