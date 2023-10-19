@@ -1,46 +1,45 @@
 package ru.hogwarts.school.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repository.StudentRepository;
 
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImp implements StudentService {
 
-    private final HashMap<Long, Student> students = new HashMap<>();
-    private long count = 0;
+    @Autowired
+    private final StudentRepository studentRepository;
+
+    public StudentServiceImp(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     @Override
     public Student addStudent(Student student) {
-        student.setId(count++);
-        students.put(student.getId(), student);
-        return students.get(student.getId());
+       return studentRepository.save(student);
     }
     @Override
     public Student findStudent(Long id) {
-        return students.get(id);
+        return studentRepository.findById(id).orElse(null);
     }
     @Override
     public Student editStudent(Student student) {
-        if (!students.containsKey(student.getId())) {
-            return null;
-        }
-        students.put(student.getId(), student);
-        return students.get(student.getId());
+        return studentRepository.save(student);
     }
     @Override
     public void deleteStudent(Long id) {
-        students.remove(id);
+        studentRepository.deleteById(id);
     }
 
     @Override
     public Collection<Student> getAll() {
-        return students.values();
+        return studentRepository.findAll();
     }
 
     @Override
