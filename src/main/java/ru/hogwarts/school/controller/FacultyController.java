@@ -4,8 +4,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
 
+import java.security.PublicKey;
 import java.util.Collection;
 import java.util.List;
 
@@ -63,5 +65,9 @@ public class FacultyController {
     public List<Faculty> getFacultySortedByNameAndColorList(@RequestParam(value = "name") String name,
                                                             @RequestParam(value = "color") String color) {
         return facultyService.findByNameIgnoreCaseAndColorIgnoreCase(name, color);
+    }
+    @GetMapping("/{id}/student")
+    public Collection<Student> getStudents(@PathVariable Long id){
+        return facultyService.getStudents(id);
     }
 }

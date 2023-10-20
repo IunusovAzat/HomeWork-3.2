@@ -3,7 +3,9 @@ package ru.hogwarts.school.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
+import ru.hogwarts.school.repository.StudentRepository;
 
 
 import java.util.Collection;
@@ -15,9 +17,12 @@ public  class FacultyServiceImp implements FacultyService {
 
     @Autowired
     private final FacultyRepository facultyRepository;
+    @Autowired
+    private final StudentRepository studentRepository;
 
-    public FacultyServiceImp(FacultyRepository facultyRepository) {
+    public FacultyServiceImp(FacultyRepository facultyRepository, StudentService studentService, StudentRepository studentRepository) {
         this.facultyRepository = facultyRepository;
+        this.studentRepository = studentRepository;
     }
 
     @Override
@@ -52,12 +57,19 @@ public  class FacultyServiceImp implements FacultyService {
                 filter(it -> it.getColor().equals(color)).
                 collect(Collectors.toList());
     }
+
     @Override
     public List<Faculty> sortFacultyByColor(String color) {
         return facultyRepository.findByColor(color);
     }
+
     @Override
-    public List<Faculty> findByNameIgnoreCaseAndColorIgnoreCase(String name, String color){
+    public List<Faculty> findByNameIgnoreCaseAndColorIgnoreCase(String name, String color) {
         return facultyRepository.findByNameIgnoreCaseAndColorIgnoreCase(name, color);
+    }
+
+    @Override
+    public Collection<Student> getStudents(Long id) {
+        return studentRepository.findAllByFaculty_Id(id);
     }
 }
