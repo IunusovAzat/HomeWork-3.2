@@ -72,4 +72,9 @@ public  class FacultyServiceImp implements FacultyService {
     public Collection<Student> getStudents(Long id) {
         return studentRepository.findAllByFaculty_Id(id);
     }
+
+    @Override
+    public Collection<Student> getFacultyStudents(Long id) {
+        return facultyRepository.findById(id).map(Faculty::getStudents).orElse(null);
+    }
 }
