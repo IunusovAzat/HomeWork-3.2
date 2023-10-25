@@ -13,6 +13,9 @@ public class Student {
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
+    public Faculty getFaculty() {
+        return faculty;
+    }
 
 
     @Override

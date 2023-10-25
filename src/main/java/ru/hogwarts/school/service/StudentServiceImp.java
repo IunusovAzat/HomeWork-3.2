@@ -61,13 +61,13 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public List<Student> getStudent(Long id) {
+    public Collection<Student> getStudent(Long id) {
         return studentRepository.findAllByFaculty_Id(id);
     }
 
     @Override
-    public Faculty findStudentByIdFaculty(Long id) {
-        return null;
+    public Faculty findStudentByFacultyId(Long id) {
+        return studentRepository.findById(id).map(Student::getFaculty).orElse(null);
     }
 
 }
