@@ -70,9 +70,19 @@ public class StudentController {
     }
 
     @GetMapping("/{id}/fakulty")
-    public Faculty getFakultyByStudent(@PathVariable Long id) {
-        return studentService.findStudentByIdFaculty(id);
+    public Faculty getFacultyByStudent(@PathVariable Long id) {
+        return studentService.getFacultyByStudentId(id);
     }
 
-
+    @GetMapping("/count")
+    public int getCountOfStudents(){
+        return studentService.getCountOfStudents();
+    }
+    @GetMapping("/averege-age")
+    public int getAveregeAge(){
+        return studentService.getAveregeAge();
+    } @GetMapping("/five-ordere-by-id")
+    public Collection<Student> getFiveStudentsOrderedById(){
+        return studentService.getFiveStudentsOrderedById();
+    }
 }

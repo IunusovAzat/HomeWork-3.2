@@ -30,6 +30,14 @@ public class Faculty {
         Faculty faculty = (Faculty) o;
         return id == faculty.id && Objects.equals(name, faculty.name) && Objects.equals(color, faculty.color);
     }
+    public Faculty() {
+    }
+    public Faculty(Integer id,String name, String color) {
+        this.id = Long.valueOf(id);
+        this.name = name;
+        this.color = color;
+    }
+
 
     @Override
     public int hashCode() {
