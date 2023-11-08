@@ -101,5 +101,25 @@ public class StudentServiceImp implements StudentService {
         return studentRepository.getFiveStudentsOrderedById();
     }
 
+    @Override
+    public Collection<String> getStudentsStartsWithA() {
+        return studentRepository.findAll().
+                stream().
+                map(Student::getName).
+                map(String::toUpperCase).
+                filter(it -> it.startsWith("A")).
+                sorted().
+                collect(Collectors.toList());
+    }
+
+    @Override
+    public double getAverageAgeViaStreams() {
+        return studentRepository.findAll().
+                stream().
+                mapToInt(Student::getAge).
+                average().
+                orElse(0.0);
+    }
+
 
 }

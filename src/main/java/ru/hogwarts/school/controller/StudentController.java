@@ -9,6 +9,7 @@ import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -21,7 +22,7 @@ public class StudentController {
     }
 
     @GetMapping()
-    public Collection<Student> getAll(){
+    public Collection<Student> getAll() {
         return studentService.getAll();
     }
 
@@ -40,7 +41,7 @@ public class StudentController {
     }
 
     @PutMapping
-    public ResponseEntity<Student> editStudent( @RequestBody Student student) {
+    public ResponseEntity<Student> editStudent(@RequestBody Student student) {
         Student foundStudent = studentService.editStudent(student);
         if (foundStudent == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -55,9 +56,10 @@ public class StudentController {
     }
 
     @GetMapping("/find")
-    public Collection<Student> getAllByAge(@RequestParam int age){
+    public Collection<Student> getAllByAge(@RequestParam int age) {
         return studentService.getAllByAge(age);
     }
+
     @GetMapping("/sort")
     public List<Student> getStudentSortedList(@RequestParam(value = "age") int age) {
         return studentService.sortStudentByAge(age);
@@ -75,14 +77,27 @@ public class StudentController {
     }
 
     @GetMapping("/count")
-    public int getCountOfStudents(){
+    public int getCountOfStudents() {
         return studentService.getCountOfStudents();
     }
+
     @GetMapping("/averege-age")
-    public int getAveregeAge(){
+    public int getAveregeAge() {
         return studentService.getAveregeAge();
-    } @GetMapping("/five-ordere-by-id")
-    public Collection<Student> getFiveStudentsOrderedById(){
+    }
+
+    @GetMapping("/five-ordere-by-id")
+    public Collection<Student> getFiveStudentsOrderedById() {
         return studentService.getFiveStudentsOrderedById();
+    }
+
+    @GetMapping("/starts-with-a")
+    public Collection<String> getStudentsStartsWithA() {
+        return studentService.getStudentsStartsWithA();
+    }
+
+    @GetMapping("/average-age-via-streams")
+    public double getAverageAgeViaStreams(){
+        return studentService.getAverageAgeViaStreams();
     }
 }
