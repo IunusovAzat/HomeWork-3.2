@@ -23,6 +23,9 @@ public interface StudentService {
     Collection<Student> getFiveStudentsOrderedById();
     Collection<String> getStudentsStartsWithA();
     double getAverageAgeViaStreams();
+    void threads();
+    void synchronizedThreads();
+
 
 }
 

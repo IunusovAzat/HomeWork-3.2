@@ -100,4 +100,14 @@ public class StudentController {
     public double getAverageAgeViaStreams(){
         return studentService.getAverageAgeViaStreams();
     }
+
+    @GetMapping("/threads")
+    public void threads(){
+         studentService.threads();
+    }
+    @GetMapping("/synchronized-threads")
+    public void synchronizedThreads(){
+        studentService.synchronizedThreads();
+    }
+
 }
